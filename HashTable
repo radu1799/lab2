@@ -1,0 +1,65 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Oct 13 19:19:10 2020
+
+@author: radun
+"""
+
+
+class HashTable(object):
+    def __init__(self, length = 17):
+        self.array = [None for i in range(0,length)]
+        self.fill = 0
+    def hash(self, key):
+        sumString = 0
+        for i in key:
+            sumString += ord(i)
+        return sumString % len(self.array)
+    def add(self, symbol):
+        index = self.hash(symbol)
+        # This index already contain some values.
+        # This means that this add MIGHT be an update
+        # to a key that already exist. Instead of just storing
+        # the value we have to first look if the key exist.
+        
+        if self.array[index] is not None:
+            for val in self.array[index]:
+                # If key is found, then update
+                # its current value to the new value.
+            
+                if (val == symbol):
+                    break
+                else:
+                # If no breaks was hit in the for loop, it 
+                # means that no existing key was found, 
+                # so we can simply just add it to the end.
+                    self.array[index].append(symbol)
+        else:
+            # This index is empty. We should initiate 
+            # a list and append our key-value-pair to it.
+            self.array[index] = []
+            self.array[index].append(symbol)
+    def get(self, symbol):
+        index = self.hash(symbol)
+        if self.array[index] is None:
+            return None
+        else:
+            # Loop through all key-value-pairs
+            # and find if our key exist. If it does 
+            # then return its value.
+            for val in self.array[index]:
+                if (val == symbol):
+                    return symbol
+            return None
+
+if __name__ == '__main__':
+    symbolTable =HashTable(3)
+    symbolTable.add("unu")
+    symbolTable.add("doi")
+    symbolTable.add("trei")
+    symbolTable.add("patru")
+
+print(symbolTable.get("unu"), "at index:", symbolTable.hash("unu"))
+print(symbolTable.get("doi"), "at index:", symbolTable.hash("doi"))
+print(symbolTable.get("trei"), "at index:", symbolTable.hash("trei"))
+
