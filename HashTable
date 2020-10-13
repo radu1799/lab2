@@ -23,11 +23,11 @@ class HashTable(object):
         # the value we have to first look if the key exist.
         
         if self.array[index] is not None:
-            for val in self.array[index]:
+            for value in self.array[index]:
                 # If key is found, then update
                 # its current value to the new value.
             
-                if (val == symbol):
+                if (value == symbol):
                     break
                 else:
                 # If no breaks was hit in the for loop, it 
@@ -47,8 +47,8 @@ class HashTable(object):
             # Loop through all key-value-pairs
             # and find if our key exist. If it does 
             # then return its value.
-            for val in self.array[index]:
-                if (val == symbol):
+            for value in self.array[index]:
+                if (value == symbol):
                     return symbol
             return None
 
